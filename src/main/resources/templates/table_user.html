@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: head"></head>
+<body>
+
+<div class="container-fluid">
+    <div class="row mt-2">
+        <div class="col-12">
+            <nav th:replace="navibar :: navib"></nav>
+        </div>
+    </div>
+    <br>
+    <div id="search2" th:action="${'tableuser'}">
+        <table class="table-sm table-bordered table-striped table-responsive-sm w-100">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Id</th>
+                <th>Active</th>
+                <th>Login</th>
+                <th>Name</th>
+                <th>Last name</th>
+                <th>email</th>
+                <th>password</th>
+                <th>Acc option</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="c, i : ${viewtable}">
+                <td th:text="${i.count}"></td>
+                <td th:text="${c.getId()}"></td>
+                <td th:text="${c.getActive()}"></td>
+                <td th:text="${c.getLogin()}"></td>
+                <td th:text="${c.getName()}"></td>
+                <td th:text="${c.getLastname()}"></td>
+                <td th:text="${c.getEmail()}"></td>
+                <td th:text="${c.getPassword()}"></td>
+                <td>
+                    <form action="/deleteUser" method="post">
+                        <input hidden name="id" th:value="${c.getId()}">
+                        <button type="submit" class="btn btn-danger btn-sm pt-0 pb-0">delete user</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

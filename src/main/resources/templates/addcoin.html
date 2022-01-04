@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: head"></head>
+<body>
+
+
+<div class="container-fluid">
+    <div class="row mt-2">
+        <div class="col-12">
+            <nav th:replace="navibar :: navib"></nav>
+        </div>
+    </div>
+    <br>
+
+    <form class="form-horizontal bg-light" action="/new-coin" method="post">
+        <div class="row mt-2">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="nameField" class="col-xs-2">Nazwa: </label>
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" name="nameField" id="nameField" placeholder="Podaj nazwę"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group" th:action="${'/addcoin'}">
+                    <label for="seriesField" class="col-xs-2">Seria: </label>
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" name="seriesField" id="seriesField" list="seriesList" placeholder="Podaj serię"/>
+                        <datalist id="seriesList">
+                            <option th:each="g : ${getseries}" th:value="${g}" th:text="${g}"/>
+                        </datalist>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="form-group" th:action="${'/addcoin'}">
+                    <label for="valueField" class="col-xs-2">Nominał: </label>
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" name="valueField" id="valueField" list="valueList" placeholder="Podaj nominał"/>
+                        <datalist id="valueList">
+                            <option th:each="g : ${getvalue}" th:value="${g}" th:text="${g}"/>
+                        </datalist>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="form-group" th:action="${'/addcoin'}">
+                    <label for="countryField" class="col-xs-2">Kraj emisji: </label>
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" name="countryField" id="countryField" list="countryList" placeholder="Podaj kraj emisji"/>
+                        <datalist id="countryList">
+                            <option th:each="g : ${getcountry}" th:value="${g}" th:text="${g}"/>
+                        </datalist>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="form-group" th:action="${'/addcoin'}">
+                    <label for="halmarkField" class="col-xs-2">Próba: </label>
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" name="halmarkField" id="halmarkField" list="hallmarkList" placeholder="Podaj próbę"/>
+                        <datalist id="hallmarkList">
+                            <option th:each="g : ${gethallmark}" th:value="${g}" th:text="${g}"/>
+                        </datalist>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="form-group" th:action="${'/addcoin'}">
+                    <label for="stampField" class="col-xs-2">Stempel: </label>
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" name="stampField" id="stampField" list="stampList" placeholder="Podaj stempel"/>
+                        <datalist id="stampList">
+                            <option th:each="g : ${getstamp}" th:value="${g}" th:text="${g}"/>
+                        </datalist>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="dimansionField" class="col-xs-2">Wymiary: </label>
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" name="dimansionField" id="dimansionField" placeholder="Podaj wymiary"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="massField" class="col-xs-2">Masa: </label>
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" name="massField" id="massField" placeholder="Podaj masę"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="emissionField" class="col-xs-2">Wielkość emisji: </label>
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" name="emissionField" id="emissionField" placeholder="Podaj wielkość emisji"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="emissionDateField" class="col-xs-2">Rok emisji: </label>
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" name="emissionDateField" id="emissionDateField" placeholder="Podaj rok emisji"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="emissionPriseField" class="col-xs-2">Cena emisji: </label>
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" name="emissionPriseField" id="emissionPriseField" placeholder="Podaj cenę emisyjną"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="awersField" class="col-xs-2">Zdjęcie awersu: </label>
+                    <div class="col-xs-10">
+                        <textarea class="form-control" name="awersField" id="awersField" placeholder="Podaj adres do pliku graficznego awersu"> </textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="rewersField" class="col-xs-2">Zdjęcie rewersu: </label>
+                    <div class="col-xs-10">
+                        <textarea class="form-control" name="rewersField" id="rewersField" placeholder="Podaj adres do pliku graficznego rewersu"> </textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="noteField" class="col-xs-2">Nota: </label>
+                    <div class="col-xs-10">
+                        <textarea class="form-control" name="noteField" id="noteField" placeholder="Wpisz opis"> </textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="col-xs-10 col-xs-offset-2">
+                    <button class="btn btn-primary">Dodaj monetę</button> <button type="reset" class="btn btn-default">Wyczyść</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</body>
+</html>

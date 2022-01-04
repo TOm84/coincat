@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: head"></head>
+<body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+<div class="container-fluid">
+    <div class="row mt-2">
+        <div class="col-12">
+            <nav th:replace="navibar :: navib"></nav>
+        </div>
+    </div>
+
+    <div class="bg-light" th:action="${'/'}">
+        <div>
+            <table class="w-auto table-sm ">
+                <tbody>
+                <tr>
+                    <td th:text="'Kurs USD: '+ ${usd}"></td>
+                    <td class="bg-white"></td>
+                    <td th:text="'Au: '+ ${gold} + ' PLN/uncja'"></td>
+                    <td class="bg-white"></td>
+                    <td th:text="'Ag: '+ ${silver} + ' PLN/uncja'"></td>
+                    <td class="bg-white"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <p class="navbar-text" th:text="'Użytkownik: ' + ${user}"></p>
+    <br>
+    <br>
+    <div class="bg-light">
+        <strong>Option:</strong>
+        <a class="nav-link" href="/tableuser">Table user</a>
+    </div>
+    <br>
+    <div class="row mt-2">
+        <div class="col-6">
+            <form th:action="${'admin'}" method="get">
+                <label th:field="coin1">Szukaj po nazwie serii: </label>
+                <select id="ser" name="ser">
+                    <option value="">Wybierz serię</option>
+                    <option th:each="gs : ${getseries}" th:value="${gs}" th:text="${gs}"/>
+                </select>
+                <button type="submit" class="btn btn-outline-dark btn-sm">Szukaj</button>
+            </form>
+
+
+        </div>
+
+        <div class="col-6">
+            <form th:action="${'admin'}" method="get">
+                <label th:field="coin2">Szukaj po nominale: </label>
+                <select id="nom" name="nom">
+                    <option value="">Wybierz nominał</option>
+                    <option th:each="gv : ${getvalue}" th:value="${gv}" th:text="${gv}"/>
+                    <option/>
+                </select>
+                <button type="submit" class="btn btn-outline-dark btn-sm">Szukaj</button>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-4">
+            <form th:action="${'admin'}" method="get">
+                <label th:field="coin3">Szukaj po kraju emisji: </label>
+                <select id="coun" name="coun">
+                    <option value="">Wybierz kraj</option>
+                    <option th:each="gc : ${getcountry}" th:value="${gc}" th:text="${gc}">
+                    <option/>
+                </select>
+                <button type="submit" class="btn btn-outline-dark btn-sm">Szukaj</button>
+            </form>
+        </div>
+
+        <div class="col-4">
+            <form th:action="${'admin'}" method="get">
+                <label th:field="coin4">Szukaj wg. próby: </label>
+                <select id="hall" name="hall">
+                    <option value="">Wybierz próbę</option>
+                    <option th:each="gh : ${gethallmark}" th:value="${gh}" th:text="${gh}"/>
+                </select>
+                <button type="submit" class="btn btn-outline-dark btn-sm">Szukaj</button>
+            </form>
+        </div>
+
+        <div class="col-4">
+            <form th:action="${'admin'}" method="get">
+                <label th:field="coin5">Szukaj po stemplu: </label>
+                <select id="stam" name="stam">
+                    <option value="">Wybierz stempel</option>
+                    <option th:each="gs : ${getstamp}" th:value="${gs}" th:text="${gs}"/>
+                </select>
+                <button type="submit" class="btn btn-outline-dark btn-sm">Szukaj</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+
+    </div>
+
+    <form id="search2" th:action="${'admin'}">
+        <table class="table-sm table-bordered table-striped table-responsive-sm w-100">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Nazwa</th>
+                <th>Seria</th>
+                <th>Nominał</th>
+                <th>Kraj emisji</th>
+                <th>Próba</th>
+                <th>Stempel</th>
+                <th>Wymiary</th>
+                <th>Masa</th>
+                <th>Wielkosc emisji</th>
+                <th>Data emisji</th>
+                <th>Cena emisji</th>
+                <th>Awers</th>
+                <th>Rewers</th>
+                <th>Coin options</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="c, i : ${viewtable}">
+                <td th:text="${i.count}"></td>
+                <td th:text="${c.getName()}"></td>
+                <td th:text="${c.getSeries()}"></td>
+                <td th:text="${c.getValue()}"></td>
+                <td th:text="${c.getCountry()}"></td>
+                <td th:text="${c.getHallmark()}"></td>
+                <td th:text="${c.getStamp()}"></td>
+                <td th:text="${c.getDimansion()}"></td>
+                <td th:text="${c.getMass()}"></td>
+                <td th:text="${c.getEmission()}"></td>
+                <td th:text="${c.getEmissiondate()}"></td>
+                <td th:text="${c.getEmissionprise()}"></td>
+                <td>
+                    <img th:src="${c.getAwers()}" style="width: 100px; height: auto">
+                </td>
+                <td>
+                    <img th:src="${c.getRewers()}" style="width: 100px; height: auto">
+                </td>
+                <td>
+                    <div>
+                        <input hidden name="id" th:value="${c.getId()}">
+                        <button type="button" class="btn btn-success open-button btn-sm pt-0 pb-0" data-toggle="modal" data-target="#infoModal" th:value="${c.getId()}" th:attrappend="data-target=${c.getId()}">
+                            Info
+                        </button>
+                        <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" th:attrappend="id=${c.getId()}">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Coin note:</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input hidden name="id" th:value="${c.getId()}">
+                                        <h4>Informacje o monecie:</h4>
+                                        <h2 th:text="${c.getNote()}"></h2>
+                                        <br>
+                                        <h4>Opłacalność inwestycji:</h4>
+                                        <h2 th:text="'Masa monety: ' + ${c.getMass()}"></h2>
+                                        <h2 th:text="'Rodzaj stopu z próbą: ' + ${c.getHallmark()}"></h2>
+                                        <h2 th:text="'Stop: ' + ${@coinService.takeAlloyFromCoin(c.getId())}"></h2>
+                                        <h2 th:text="'Wartość kruszca: ' + ${@coinRestController.convertMassCoinToMetal(c.getId())}"></h2>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div>
+                        <button type="button" class="btn btn-primary btn-sm pt-0 pb-0" data-toggle="modal" data-target="#editModal" th:value="${c.getId()}" th:attrappend="data-target=${c.getId()}">
+                            edit
+                        </button>
+                        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="eMLabel" aria-hidden="true" th:attrappend="id=${c.getId()}">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="eMLabel">Edit Coin</h5>
+                                        <h5 class="modal-title" id="updateId">Edit Coin</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="/updateCoin" method = "post" class="form-horizontal bg-light">
+                                            <input hidden name="id" th:value="${c.getId()}">
+                                            <div class="row mt-2">
+                                                <div class="col-6">
+                                                    <label for="nameFieldUpdate" class="col-xs-2">Nazwa: </label>
+                                                    <div class="col-xs-10">
+                                                        <input type="text" class="form-control" name="nameFieldUpdate" id="nameFieldUpdate" placeholder="Podaj nazwę" th:value="${c.getName()}"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="seriesFieldUpdate" class="col-xs-2">Seria: </label>
+                                                        <div class="col-xs-10">
+                                                            <input type="text" class="form-control" name="seriesFieldUpdate" id="seriesFieldUpdate" list="seriesList" placeholder="Podaj serię" th:value="${c.getSeries()}"/>
+                                                            <datalist id="seriesList" th:action="${'/admin'}">
+                                                                <option th:each="g : ${getseries}" th:value="${g}" th:text="${g}"/>
+                                                            </datalist>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label for="valueFieldUpdate" class="col-xs-2">Nominał: </label>
+                                                        <div class="col-xs-10">
+                                                            <input type="text" class="form-control" name="valueFieldUpdate" id="valueFieldUpdate" list="valueList" placeholder="Podaj nominał" th:value="${c.getValue()}"/>
+                                                            <datalist id="valueList" th:action="${'/admin'}">
+                                                                <option th:each="g : ${getvalue}" th:value="${g}" th:text="${g}"/>
+                                                            </datalist>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label for="countryFieldUpdate" class="col-xs-2">Kraj emisji: </label>
+                                                        <div class="col-xs-10">
+                                                            <input type="text" class="form-control" name="countryFieldUpdate" id="countryFieldUpdate" list="countryList" placeholder="Podaj kraj emisji" th:value="${c.getCountry()}"/>
+                                                            <datalist id="countryList" th:action="${'/admin'}">
+                                                                <option th:each="g : ${getcountry}" th:value="${g}" th:text="${g}"/>
+                                                            </datalist>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label for="halmarkFieldUpdate" class="col-xs-2">Próba: </label>
+                                                        <div class="col-xs-10">
+                                                            <input type="text" class="form-control" name="halmarkFieldUpdate" id="halmarkFieldUpdate" list="hallmarkList" placeholder="Podaj próbę" th:value="${c.getHallmark()}"/>
+                                                            <datalist id="hallmarkList" th:action="${'/admin'}">
+                                                                <option th:each="g : ${gethallmark}" th:value="${g}" th:text="${g}"/>
+                                                            </datalist>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label for="stampFieldUpdate" class="col-xs-2">Stempel: </label>
+                                                        <div class="col-xs-10">
+                                                            <input type="text" class="form-control" name="stampFieldUpdate" id="stampFieldUpdate" list="stampList" placeholder="Podaj stempel" th:value="${c.getStamp()}"/>
+                                                            <datalist id="stampList" th:action="${'/aadmin'}">
+                                                                <option th:each="g : ${getstamp}" th:value="${g}" th:text="${g}"/>
+                                                            </datalist>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label for="dimansionFieldUpdate" class="col-xs-2">Wymiary: </label>
+                                                        <div class="col-xs-10">
+                                                            <input type="text" class="form-control" name="dimansionFieldUpdate" id="dimansionFieldUpdate" placeholder="Podaj wymiary" th:value="${c.getDimansion()}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label for="massFieldUpdate" class="col-xs-2">Masa: </label>
+                                                        <div class="col-xs-10">
+                                                            <input type="text" class="form-control" name="massFieldUpdate" id="massFieldUpdate" placeholder="Podaj masę" th:value="${c.getMass()}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label for="emissionFieldUpdate" class="col-xs-2">Wielkość emisji: </label>
+                                                        <div class="col-xs-10">
+                                                            <input type="text" class="form-control" name="emissionFieldUpdate" id="emissionFieldUpdate" placeholder="Podaj wielkość emisji" th:value="${c.getEmission()}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label for="emissionDateFieldUpdate" class="col-xs-2">Rok emisji: </label>
+                                                        <div class="col-xs-10">
+                                                            <input type="text" class="form-control" name="emissionDateFieldUpdate" id="emissionDateFieldUpdate" placeholder="Podaj rok emisji" th:value="${c.getEmissiondate()}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label for="emissionPriseFieldUpdate" class="col-xs-2">Cena emisji: </label>
+                                                        <div class="col-xs-10">
+                                                            <input type="text" class="form-control" name="emissionPriseFieldUpdate" id="emissionPriseFieldUpdate" placeholder="Podaj cenę emisyjną" th:value="${c.getEmissionprise()}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="awersFieldUpdate" class="col-xs-2">Adres do pliku awersu: </label>
+                                                        <div class="col-xs-10">
+                                                            <textarea class="form-control" name="awersFieldUpdate" id="awersFieldUpdate" placeholder="Podaj adres do pliku graficznego awersu" rows = "4" th:text="${c.getAwers()}"> </textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="rewersFieldUpdate" class="col-xs-2">Adres do pliku rewersu: </label>
+                                                        <div class="col-xs-10">
+                                                            <textarea class="form-control" name="rewersFieldUpdate" id="rewersFieldUpdate" placeholder="Podaj adres do pliku graficznego rewersu" rows = "4" th:text="${c.getRewers()}"> </textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="noteFieldUpdate" class="col-xs-2">Nota: </label>
+                                                        <div class="col-xs-10">
+                                                            <textarea class="form-control" name="noteFieldUpdate" id="noteFieldUpdate" placeholder="Opis monety" rows = "4" th:text="${c.getNote()}"> </textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <div class="col-xs-10 col-xs-offset-2">
+                                                        <button type="submit" class="btn btn-primary" >Save coin</button> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <form action="/delete" method="post">
+                        <input hidden name="id" th:value="${c.getId()}">
+                        <button type="submit" class="btn btn-danger btn-sm pt-0 pb-0">delete</button>
+                    </form>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+</body>
+</html>

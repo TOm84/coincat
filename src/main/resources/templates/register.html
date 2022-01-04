@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: head"></head>
+<body>
+
+
+<div class="container-fluid">
+    <div class="row mt-2">
+        <div class="col-12">
+            <nav th:replace="navibar :: navib"></nav>
+        </div>
+    </div>
+    <br>
+    <form class="form-horizontal row-cols-1" action="/registerUser" method="post">
+        <div class="well bg-light">
+            <br>
+            <label for="loginField" class="col-xs-2">Podaj login: </label>
+            <input type="text" name="loginField" placeholder="Podaj login"><br>
+
+            <label for="nameField" class="col-xs-2">Podaj imię: </label>
+            <input type="text" name="nameField" placeholder="Podaj imię"><br>
+
+            <label for="lastNameField" class="col-xs-2">Podaj nazwisko: </label>
+            <input type="text" name="lastNameField" placeholder="Podaj nazwisko"><br>
+
+            <label for="emailField" class="col-xs-2">Podaj email: </label>
+            <input type="text" name="emailField" placeholder="Podaj adres email"><br>
+
+            <label for="passwordField1" class="col-xs-2">Podaj hasło: </label>
+            <input type="password" name="passwordField1" placeholder="Podaj hasło"><br><br>
+
+            <!--                <label for="passwordField2" class="col-xs-2">Powtórz hasło: </label>-->
+            <!--                <input type="password" name="password2" placeholder="Podaj hasło"><br>-->
+
+            <button class="btn btn-primary" type="submit">register</button>
+            <button class="btn btn-success" type="reset">reset</button>
+            <a href="/"><button class="btn btn-default" type="button">back</button></a>
+        </div>
+    </form>
+
+</div>
+
+</form>
+
+</body>
+</html>
