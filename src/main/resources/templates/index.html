@@ -113,6 +113,7 @@
                 <th>Wielkosc emisji</th>
                 <th>Data emisji</th>
                 <th>Cena emisji</th>
+                <th>Wartosc</th>
                 <th>Awers</th>
                 <th>Rewers</th>
                 <th>Coin options</th>
@@ -133,6 +134,7 @@
                 <td th:text="${c.getEmission()}"></td>
                 <td th:text="${c.getEmissiondate()}"></td>
                 <td th:text="${c.getEmissionprise()}"></td>
+                <td th:text="${c.getBuyprise()}"></td>
                 <td>
                     <img th:src="@{${c.getAwers()}}" style="width: 100px; height: auto">
                 </td>

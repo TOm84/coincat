@@ -122,6 +122,7 @@
                 <th>Wielkosc emisji</th>
                 <th>Data emisji</th>
                 <th>Cena emisji</th>
+                <th>Wartosc</th>
                 <th>Awers</th>
                 <th>Rewers</th>
                 <th>Coin options</th>
@@ -142,6 +143,7 @@
                 <td th:text="${c.getEmission()}"></td>
                 <td th:text="${c.getEmissiondate()}"></td>
                 <td th:text="${c.getEmissionprise()}"></td>
+                <td th:text="${c.getBuyprise()}"></td>
                 <td>
                     <img th:src="${c.getAwers()}" style="width: 100px; height: auto">
                 </td>
@@ -313,6 +315,21 @@
                                                             <input type="text" class="form-control" name="emissionPriseFieldUpdate" id="emissionPriseFieldUpdate" placeholder="Podaj cenę emisyjną" th:value="${c.getEmissionprise()}"/>
                                                         </div>
                                                     </div>
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label for="buyPriseUpdate" class="col-xs-2">Cena emisji: </label>
+                                                        <div class="col-xs-10">
+                                                            <input type="text" class="form-control" name="buyPriseUpdate" id="buyPriseUpdate" placeholder="Podaj cenę emisyjną" th:value="${c.getBuyprise()}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+
+                                                </div>
+                                                <div class="col-4">
+
                                                 </div>
 
                                                 <div class="col-6">

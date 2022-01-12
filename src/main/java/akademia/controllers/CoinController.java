@@ -99,13 +99,14 @@ public class CoinController {
       @RequestParam(value = "emissionField", required = false, defaultValue = "0") Integer emissionField,
       @RequestParam(value = "emissionDateField", required = false, defaultValue = "nn") String emissionDateField,
       @RequestParam(value = "emissionPriseField", required = false, defaultValue = "nn") String emissionPriseField,
+      @RequestParam(value = "buyPrise", required = false, defaultValue = "nn") String buyPrise,
       @RequestParam(value = "awersField", required = false, defaultValue = "nn") String awersField,
       @RequestParam(value = "rewersField", required = false, defaultValue = "nn") String rewersField,
       @RequestParam(value = "noteField", required = false, defaultValue = "nn") String noteField,
       Model model) {
     Coin coin = new Coin(nameField, seriesField, valueField, countryField, halmarkField,
         stampField, dimansionField, massField, emissionField, emissionDateField,
-        emissionPriseField, awersField, rewersField, noteField);
+        emissionPriseField, buyPrise,awersField, rewersField, noteField);
     coinRestController.addCoin(coin);
     return "redirect:/";
   }
@@ -123,6 +124,7 @@ public class CoinController {
       @RequestParam(value = "emissionFieldUpdate", required = false, defaultValue = "0") Integer emissionField,
       @RequestParam(value = "emissionDateFieldUpdate", required = false, defaultValue = "nn") String emissionDateField,
       @RequestParam(value = "emissionPriseFieldUpdate", required = false, defaultValue = "nn") String emissionPriseField,
+      @RequestParam(value = "buyPriseUpdate", required = false, defaultValue = "nn") String buyPriseField,
       @RequestParam(value = "awersFieldUpdate", required = false, defaultValue = "nn") String awersField,
       @RequestParam(value = "rewersFieldUpdate", required = false, defaultValue = "nn") String rewersField,
       @RequestParam(value = "noteFieldUpdate", required = false, defaultValue = "nn") String noteField,
@@ -130,7 +132,7 @@ public class CoinController {
 
     Coin coin = new Coin(nameField, seriesField, valueField, countryField, halmarkField,
         stampField, dimansionField, massField, emissionField, emissionDateField,
-        emissionPriseField, awersField, rewersField, noteField);
+        emissionPriseField, buyPriseField, awersField, rewersField, noteField);
     coinRestController.updateCoin(coin, id);
     return "redirect:/admin";
 

@@ -50,6 +50,9 @@ public class Coin {
   private String emissionprise;
 
   @Column
+  private String buyprise;
+
+  @Column
   private String awers;
 
   @Column
@@ -63,7 +66,7 @@ public class Coin {
 
   public Coin( String name, String series, Integer value, String country,
                String hallmark, String stamp, String dimansion, String mass,
-               Integer emission, String emissiondate, String emissionprise, String awers,
+               Integer emission, String emissiondate, String emissionprise, String buyprise, String awers,
                String rewers, String note) {
     this.name = name;
     this.series = series;
@@ -76,6 +79,7 @@ public class Coin {
     this.emission = emission;
     this.emissiondate = emissiondate;
     this.emissionprise = emissionprise;
+    this.buyprise = buyprise;
     this.awers = awers;
     this.rewers = rewers;
     this.note = note;
@@ -177,6 +181,14 @@ public class Coin {
     this.emissionprise = emissionprise;
   }
 
+  public String getBuyprise() {
+    return buyprise;
+  }
+
+  public void setBuyprise(String buyprise) {
+    this.buyprise = buyprise;
+  }
+
   public String getAwers() {
     return awers;
   }
@@ -216,6 +228,7 @@ public class Coin {
         ", emission=" + emission +
         ", emissiondate='" + emissiondate + '\'' +
         ", emissionprise='" + emissionprise + '\'' +
+        ", buyprise='" + buyprise + '\'' +
         ", awers='" + awers + '\'' +
         ", rewers='" + rewers + '\'' +
         ", note='" + note + '\'' +

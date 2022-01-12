@@ -45,7 +45,7 @@ public class CoinRestController {
     try (
         Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
         PreparedStatement statement =
-            connection.prepareStatement("INSERT INTO coin values ((select max(t.id)+1 from (select id from coin) t),?,?,?,?,?,?,?,?,?,?,?,?,?,?);")
+            connection.prepareStatement("INSERT INTO coin values ((select max(t.id)+1 from (select id from coin) t),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);")
     ) {
       statement.setString(1, String.valueOf(coin.getName()));
       statement.setString(2, String.valueOf(coin.getSeries()));
@@ -58,9 +58,10 @@ public class CoinRestController {
       statement.setString(9, String.valueOf(coin.getEmission()));
       statement.setString(10, String.valueOf(coin.getEmissiondate()));
       statement.setString(11, String.valueOf(coin.getEmissionprise()));
-      statement.setString(12, String.valueOf(coin.getAwers()));
-      statement.setString(13, String.valueOf(coin.getRewers()));
-      statement.setString(14, String.valueOf(coin.getNote()));
+      statement.setString(12, String.valueOf(coin.getBuyprise()));
+      statement.setString(13, String.valueOf(coin.getAwers()));
+      statement.setString(14, String.valueOf(coin.getRewers()));
+      statement.setString(15, String.valueOf(coin.getNote()));
       statement.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
@@ -73,7 +74,7 @@ public class CoinRestController {
     try (
         Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
         PreparedStatement statement =
-            connection.prepareStatement("UPDATE Coin SET name = ?, series = ?, value = ?, country = ?, hallmark = ?, stamp = ?, dimansion = ?, mass = ?, emission = ?, emissiondate = ?, emissionprise = ?, awers = ?, rewers = ?, note = ? WHERE ID = ?;")
+            connection.prepareStatement("UPDATE Coin SET name = ?, series = ?, value = ?, country = ?, hallmark = ?, stamp = ?, dimansion = ?, mass = ?, emission = ?, emissiondate = ?, emissionprise = ?, buyprise = ?, awers = ?, rewers = ?, note = ? WHERE ID = ?;")
     ){
       statement.setString(1, String.valueOf(coin.getName()));
       statement.setString(2, String.valueOf(coin.getSeries()));
@@ -86,10 +87,11 @@ public class CoinRestController {
       statement.setString(9, String.valueOf(coin.getEmission()));
       statement.setString(10, String.valueOf(coin.getEmissiondate()));
       statement.setString(11, String.valueOf(coin.getEmissionprise()));
-      statement.setString(12, String.valueOf(coin.getAwers()));
-      statement.setString(13, String.valueOf(coin.getRewers()));
-      statement.setString(14, String.valueOf(coin.getNote()));
-      statement.setInt(15, id);
+      statement.setString(12, String.valueOf(coin.getBuyprise()));
+      statement.setString(13, String.valueOf(coin.getAwers()));
+      statement.setString(14, String.valueOf(coin.getRewers()));
+      statement.setString(15, String.valueOf(coin.getNote()));
+      statement.setInt(16, id);
       statement.executeUpdate();
     } catch (SQLException e){
       e.printStackTrace();
