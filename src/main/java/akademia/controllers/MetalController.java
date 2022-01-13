@@ -16,9 +16,10 @@ import static akademia.commons.Variables.USD_URL;
 
 @Controller
 public class MetalController {
-  public static float usd;
-  public static String gold;
-  public static String silver;
+
+  public static final float finalUsd = getUSD();
+  public static final float finalGold = getGold();
+  public static final float finalSilver = getSilver();
 
   public MetalController() {
   }

@@ -1,5 +1,6 @@
 package akademia.model;
 
+import akademia.controllers.MetalController;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Column;
@@ -7,6 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.text.DecimalFormat;
+
+import static akademia.controllers.MetalController.finalGold;
+import static akademia.controllers.MetalController.finalSilver;
+import static akademia.controllers.MetalController.finalUsd;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
@@ -211,6 +217,33 @@ public class Coin {
 
   public void setNote(String note) {
     this.note = note;
+  }
+
+  public String getAlloy() {
+    String stringToTrim = getHallmark();
+    String trimmed = stringToTrim.substring(0,2);
+    return trimmed;
+  }
+  public String convertMassToMetal() {
+    DecimalFormat df = new DecimalFormat("####.###");
+    String output;
+    String alloy = getAlloy();
+    float getMass = (Float.parseFloat(getMass()));
+    MetalController metalController = null;
+    float getUsd = finalUsd;
+    float getGoldGram = (float) (finalGold / 31.1034768);
+    float getSilverGram = (float) (finalSilver / 31.1034768);
+
+    if (alloy.equalsIgnoreCase("Au")) {
+      return output = df.format(getMass * getGoldGram * getUsd);
+    } else if (alloy.equalsIgnoreCase("Ag")) {
+      return output = df.format(getMass * getSilverGram * getUsd);
+    } else if (alloy.equalsIgnoreCase("MN") || alloy.equalsIgnoreCase("Cu") ||alloy.equalsIgnoreCase("Al") ) {
+      return "Stop nieinwestycyjny";
+    } else {
+      output = "Błąd stopu";
+      return output;
+    }
   }
 
   @Override

@@ -173,8 +173,8 @@
                                         <h4>Opłacalność inwestycji:</h4>
                                         <h2 th:text="'Masa monety: ' + ${c.getMass()}"></h2>
                                         <h2 th:text="'Rodzaj stopu z próbą: ' + ${c.getHallmark()}"></h2>
-                                        <h2 th:text="'Stop: ' + ${@coinService.takeAlloyFromCoin(c.getId())}"></h2>
-                                        <h2 th:text="'Wartość kruszca: ' + ${@coinRestController.convertMassCoinToMetal(c.getId())}"></h2>
+                                        <h2 th:text="'Stop: ' + ${c.getAlloy()}"></h2>
+                                        <h2 th:text="'Wartość kruszca: ' + ${c.convertMassToMetal()}"></h2>
 
                                     </div>
                                     <div class="modal-footer">
